@@ -11,6 +11,10 @@ df = pd.read_csv("Superstore_Sales_utf8.csv", parse_dates=True)
 categories = df["Category"].unique()
 selected_category = st.selectbox("Select a Category", categories)
 
+subcategories = df[df["Category"] == selected_category]["Sub_Category"].unique()
+selected_subcategories = st.multiselect("Select Sub-Categories", subcategories)
+
+
 st.dataframe(df)
 # This bar chart will not have solid bars--but lines--because the detail data is being graphed independently
 st.bar_chart(df, x="Category", y="Sales")
