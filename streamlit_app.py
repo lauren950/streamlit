@@ -14,6 +14,12 @@ selected_category = st.selectbox("Select a Category", categories)
 subcategories = df[df["Category"] == selected_category]["Sub_Category"].unique()
 selected_subcategories = st.multiselect("Select Sub-Categories", subcategories)
 
+filtered_df = df[
+    (df["Category"] == selected_category) &
+    (df["Sub_Category"].isin(selected_subcategories))
+]
+
+st.line_chart(filtered_df, x="Order_Date", y="Sales")
 
 st.dataframe(df)
 # This bar chart will not have solid bars--but lines--because the detail data is being graphed independently
