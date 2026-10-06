@@ -21,6 +21,18 @@ filtered_df = df[
 
 st.line_chart(filtered_df, x="Order_Date", y="Sales")
 
+st.write("### Selected Items Summary")
+
+total_sales = filtered_df["Sales"].sum()
+total_profit = filtered_df["Profit"].sum()
+profit_margin = (total_profit / total_sales) * 100
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric("Total Sales", f"${total_sales:,.2f}")
+col2.metric("Total Profit", f"${total_profit:,.2f}")
+col3.metric("Overall Profit Margin", f"{profit_margin:.2f}%")
+
 st.dataframe(df)
 # This bar chart will not have solid bars--but lines--because the detail data is being graphed independently
 st.bar_chart(df, x="Category", y="Sales")
